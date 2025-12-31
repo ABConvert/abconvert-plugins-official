@@ -93,6 +93,25 @@ An iterative development loop that runs Claude with the same prompt repeatedly u
 /ralph-wiggum:cancel-ralph
 ```
 
+### Autonomous Mode (No Approval Prompts)
+
+For fully autonomous loops where you don't want to approve each action, start Claude Code with the `--dangerously-skip-permissions` flag:
+
+```bash
+# Start Claude Code in autonomous mode
+claude --dangerously-skip-permissions
+
+# Then run your ralph loop
+/ralph-wiggum:ralph-loop "Build a REST API" --completion-promise "DONE" --max-iterations 50
+```
+
+**Use cases for autonomous mode:**
+- Overnight/background tasks you can walk away from
+- Well-defined tasks with automatic verification (tests, linters)
+- Greenfield projects with clear completion criteria
+
+**Warning:** This skips all permission prompts. Only use in trusted environments with well-defined tasks and iteration limits.
+
 ### Completion Promise
 
 To exit the loop, Claude must output the exact promise text in XML tags:
