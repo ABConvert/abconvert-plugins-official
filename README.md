@@ -6,14 +6,41 @@ Official Claude Code plugin marketplace by [ABConvert](https://github.com/ABConv
 
 ### 1. Add the marketplace
 
+**Using CLI:**
 ```bash
-claude plugin marketplace add abconvert/abconvert-plugins-official
+claude plugin marketplace add ABConvert/abconvert-plugins-official
+```
+
+**Using Claude Code directly:**
+```
+/plugin marketplace add ABConvert/abconvert-plugins-official
 ```
 
 ### 2. Install plugins
 
+Plugins can be installed in different scopes:
+
+| Scope | Description |
+|-------|-------------|
+| `user` | Available in all your Claude Code sessions (default) |
+| `project` | Only available in the current project |
+
+**Using CLI:**
 ```bash
+# Install for user (default)
 claude plugin install ralph-wiggum@abconvert-plugins
+
+# Install for current project only
+claude plugin install ralph-wiggum@abconvert-plugins --scope project
+```
+
+**Using Claude Code directly:**
+```
+# Install for user (default)
+/plugin install ralph-wiggum@abconvert-plugins
+
+# Install for current project only
+/plugin install ralph-wiggum@abconvert-plugins --scope project
 ```
 
 ---
@@ -80,12 +107,22 @@ The promise must be **genuinely true** - Claude cannot lie to escape the loop.
 
 ## Uninstall
 
+**Using CLI:**
 ```bash
 # Remove a plugin
 claude plugin uninstall ralph-wiggum@abconvert-plugins
 
 # Remove the marketplace
 claude plugin marketplace remove abconvert-plugins
+```
+
+**Using Claude Code directly:**
+```
+# Remove a plugin
+/plugin uninstall ralph-wiggum@abconvert-plugins
+
+# Remove the marketplace
+/plugin marketplace remove abconvert-plugins
 ```
 
 ---
@@ -102,7 +139,7 @@ This version includes fixes from [PR #12642](https://github.com/anthropics/claud
 
 ## Contributing
 
-Issues and pull requests welcome at [github.com/abconvert/abconvert-plugins-official](https://github.com/abconvert/abconvert-plugins-official).
+Issues and pull requests welcome at [github.com/ABConvert/abconvert-plugins-official](https://github.com/ABConvert/abconvert-plugins-official).
 
 ## License
 
