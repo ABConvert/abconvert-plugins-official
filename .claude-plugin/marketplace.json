@@ -1,0 +1,25 @@
+{
+  "name": "abconvert-plugins",
+  "owner": {
+    "name": "ABConvert",
+    "email": "jeffrey@abconvert.io"
+  },
+  "metadata": {
+    "description": "Official ABConvert plugin marketplace for Claude Code",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "ralph-wiggum",
+      "source": "./plugins/ralph-wiggum",
+      "description": "Interactive self-referential development loop - runs the same prompt iteratively until completion. This is a bug fix version for address input error in this issue:https://github.com/anthropics/claude-code/issues/12170 ",
+      "version": "1.0.0",
+      "author": {
+        "name": "ABConvert"
+      },
+      "category": "productivity",
+      "tags": ["iteration", "loop", "automation", "development"]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ralph-wiggum",
+  "version": "1.0.0",
+  "description": "Interactive self-referential development loop - runs the same prompt iteratively until completion",
+  "author": {
+    "name": "ABConvert"
+  }
+}
