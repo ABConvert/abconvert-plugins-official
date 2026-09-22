@@ -1,0 +1,45 @@
+name: Release skill zips
+
+# Push a tag like v1.1.0 and this builds one zip per skill, with the skill
+# folder at the zip root (what Claude.ai and ChatGPT expect on upload), and
+# attaches them to a GitHub release. The latest zip is then always at
+# https://github.com/ABConvert/abconvert-plugins-official/releases/latest/download/<skill>.zip
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build one zip per skill
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          for skill_dir in plugins/*/skills/*/; do
+            skill="$(basename "$skill_dir")"
+            [ -f "$skill_dir/SKILL.md" ] || continue
+            (cd "$(dirname "$skill_dir")" && zip -qr "$GITHUB_WORKSPACE/dist/$skill.zip" "$skill" -x '*/__pycache__/*' '*.pyc' '*/.DS_Store')
+            echo "built dist/$skill.zip"
+          done
+          ls -l dist
+
+      - name: Check each zip has SKILL.md at the skill folder root
+        run: |
+          set -euo pipefail
+          for z in dist/*.zip; do
+            skill="$(basename "$z" .zip)"
+            unzip -l "$z" | grep -q " $skill/SKILL.md$" || { echo "$z is missing $skill/SKILL.md"; exit 1; }
+          done
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/*.zip --title "$GITHUB_REF_NAME" --generate-notes

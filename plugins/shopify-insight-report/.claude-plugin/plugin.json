@@ -1,0 +1,8 @@
+{
+  "name": "shopify-insight-report",
+  "version": "1.0.0",
+  "description": "Builds a merchant-facing insight report from a store's own Shopify analytics (ShopifyQL): finds when a metric broke, which funnel step and segment moved, and whether a suspected change (theme publish, app install, checkout or shipping change, price, discount, campaign, or A/B test) caused it. Delivers a verdict-first HTML report the merchant can re-run query by query. Works with a Shopify MCP, a read-only access token, or CSV exports from the ShopifyQL editor.",
+  "author": {
+    "name": "ABConvert"
+  }
+}
