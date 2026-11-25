@@ -5,6 +5,7 @@ Skills and plugins by [ABConvert](https://github.com/ABConvert). Each skill is a
 | Skill | Use it when |
 |---|---|
 | [Shopify Insight Report](#shopify-insight-report) | A Shopify store's conversion, sales, or traffic changed and nobody knows why |
+| [Rivo Layout Variations](#rivo-layout-variations) | You want to A/B test the Rivo loyalty account widget: its buttons, texts, sections, or look |
 | [Ralph Wiggum](#ralph-wiggum) | You want Claude Code to loop on a task until it is genuinely done |
 
 ## Shopify Insight Report
@@ -61,6 +62,39 @@ cd abconvert-plugins-official/plugins/shopify-insight-report/skills
 zip -r shopify-insight-report.zip shopify-insight-report
 ```
 
+## Rivo Layout Variations
+
+Rivo's account widget, the slide-out panel where customers sign in, see their points, and redeem rewards, has one configuration per store. This skill tests several against each other with ABConvert: a different first button, an extra button, the rewards carousel on the home screen, a section hidden, new copy, or a different color.
+
+Each test group changes Rivo's own settings right before Rivo draws the widget, so Rivo draws that version itself. Nothing flickers, live values such as the points balance keep working, and the winning test group reads out as a list of Rivo settings to copy into Rivo's admin. Both test groups also record when a shopper opens the widget, so results can be filtered to the shoppers who saw it.
+
+```
+I use Rivo for loyalty. I want to A/B test the account widget: in the new version the
+first button should say "Redeem my points" and be orange, add a "Shop best sellers" button
+that goes to all products, show the rewards customers can redeem on the home screen, and
+hide Popular Today. Keep the current widget as the original. Give me the ABConvert editor
+link so I can switch between the two versions.
+```
+
+**Needs.** Rivo and ABConvert installed on the store, and ABConvert's MCP connected to your AI client ([quickstart](https://docs.abconvert.io/mcp/quickstart)). Before launch, a custom event named `Rivo widget opened` in ABConvert (the skill asks for it), and a way for shoppers to open the widget: a link to `#rivo` on the page, since many themes' account icons open Shopify's own menu for signed-in customers.
+
+### Install
+
+**Claude Code**
+
+```bash
+claude plugin marketplace add ABConvert/abconvert-plugins-official
+claude plugin install rivo-layout-variations@abconvert-plugins
+```
+
+**Claude, ChatGPT, Codex**
+
+Download [rivo-layout-variations.zip](https://github.com/ABConvert/abconvert-plugins-official/releases/latest/download/rivo-layout-variations.zip) from the latest release and upload it as a skill, the same way as the Shopify Insight Report above. For Codex, or Claude Code without the marketplace:
+
+```bash
+npx skills add ABConvert/abconvert-plugins-official --skill rivo-layout-variations -a codex
+```
+
 ## Ralph Wiggum
 
 Runs Claude Code on the same prompt repeatedly until the task is genuinely complete: a stop hook feeds the prompt back, and Claude sees its own previous work in the files and git history. Best for well-defined tasks with automatic verification, such as "fix all TypeScript errors". Details, options, and the completion-promise mechanism are in [the plugin's README](plugins/ralph-wiggum/README.md).
@@ -82,6 +116,7 @@ This copy carries the fixes from [anthropics/claude-code#12642](https://github.c
 
 ```bash
 claude plugin uninstall shopify-insight-report@abconvert-plugins
+claude plugin uninstall rivo-layout-variations@abconvert-plugins
 claude plugin uninstall ralph-wiggum@abconvert-plugins
 claude plugin marketplace remove abconvert-plugins
 ```

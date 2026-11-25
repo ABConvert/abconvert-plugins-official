@@ -1,0 +1,8 @@
+{
+  "name": "rivo-layout-variations",
+  "version": "1.0.0",
+  "description": "A/B tests the Rivo loyalty app's account widget (the slide-out account and rewards panel) with ABConvert: different buttons, texts, sections, colors or layout per test group. Each test group changes Rivo's own settings right before Rivo draws the widget, so nothing flickers, results can be filtered to shoppers who opened the widget, and a winner copies straight into Rivo's admin. Needs ABConvert's MCP connected to the store.",
+  "author": {
+    "name": "ABConvert"
+  }
+}
